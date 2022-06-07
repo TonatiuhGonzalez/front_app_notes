@@ -6,58 +6,47 @@ const root = createRoot(container)
  
 const App = () => {
   const course = 'Web languages'
-  const part1 = 'Introduction to React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a Component'
-  const exercises3 = 14
+  const part1 = [{
+    key:1,
+    name: 'Introduction to React',
+    exercises: 10
+  },
+  {
+    key:2,
+    name: 'Using props to pass data',
+    exercises: 7
+  },
+  {
+    key:3,
+    name: 'State of a component',
+    exercises: 14
+  }
+]
 
   return (
     <div>
-      <Header titulo={course}/>
-      <Content 
-        part1={part1}
-        exercises1={exercises1}
-        part2 ={part2}
-        exercises2={exercises2}
-        part3 ={part3}
-        exercises3={exercises3}/>
-      <Total exercises1={exercises1} exercises2={exercises2} exercises3 ={exercises3}/>
+      <h1>{course}</h1>
+      <Hello array={part1}/>
     </div>
   )
 }
 
-  const Header = (props) =>{
-    return(
-      <div>
-        <h1>{props.titulo}</h1>
-      </div>
-    )
-  }
+const Hello = (props) =>{
+  return(
+    <div>
+      <table>
+        <tr>
+          {props.array.map(item1 =>(
+            <td key={item1.key}>{item1.name}</td>
+          ))}
+          {props.array.map(item2 =>(
+            <td key={item2.key}>{item2.exercises}</td>
+          ))}
+        </tr>
+      </table>
+    </div>
+  )
+}
 
-  const Content = (props) =>{
-    return(
-      <div>
-        <p>
-          {props.part1} {props.exercises1}
-        </p>
-        <p>
-          {props.part2} {props.exercises2}
-        </p>
-        <p>
-          {props.part3} {props.exercises3}
-        </p>
-      </div>
-    )
-  }
-
-  const Total = (props) =>{
-    return(
-      <div>
-        <p>Number of exercises {props.exercises1 + props.exercises2 + props.exercises3}</p>
-      </div>
-    )
-  }
 
 root.render(<App />)
